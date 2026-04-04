@@ -2,6 +2,7 @@ package com.borict.candidatemanagement.services;
 import com.borict.candidatemanagement.dtos.CandidateRequestDto;
 import com.borict.candidatemanagement.dtos.CandidateResponseDto;
 import com.borict.candidatemanagement.dtos.CandidateUpdateDto;
+import com.borict.candidatemanagement.exceptions.ResourceNotFoundException;
 import com.borict.candidatemanagement.mappers.CandidateMapper;
 import com.borict.candidatemanagement.models.Candidate;
 import com.borict.candidatemanagement.repositories.CandidateRepository;
@@ -30,13 +31,13 @@ public class CandidateServiceImpl implements  CandidateService{
     @Override
     public CandidateResponseDto findById(Long id) {
         Candidate candidate = candidateRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Candidate not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Candidate not found with id: " + id));
         return CandidateMapper.toResponseDto(candidate);
     }
     @Override
     public CandidateResponseDto update(Long id, CandidateUpdateDto dto) {
         Candidate candidate = candidateRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Candidate not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Candidate not found with id: " + id));
         CandidateMapper.updateEntity(candidate, dto);
         return CandidateMapper.toResponseDto(
                 candidateRepository.save(candidate)
@@ -44,6 +45,8 @@ public class CandidateServiceImpl implements  CandidateService{
     }
     @Override
     public void delete(Long id) {
-        candidateRepository.deleteById(id);
+        Candidate candidate = candidateRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Candidate not found with id: " + id));
+        candidateRepository.delete(candidate);
     }
 }
