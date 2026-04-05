@@ -3,6 +3,7 @@ package com.borict.candidatemanagement.controllers;
 import com.borict.candidatemanagement.dtos.CandidateRequestDto;
 import com.borict.candidatemanagement.dtos.CandidateResponseDto;
 import com.borict.candidatemanagement.dtos.CandidateUpdateDto;
+import com.borict.candidatemanagement.dtos.SkillRequestDto;
 import com.borict.candidatemanagement.services.CandidateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,18 @@ public class CandidateController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id){
         candidateService.delete(id);
+    }
+
+    @PostMapping("/{candidateId}/skills")
+    public CandidateResponseDto addSkill(@PathVariable Long candidateId,
+                                         @Valid @RequestBody SkillRequestDto dto) {
+        return candidateService.addSkill(candidateId, dto);
+    }
+
+    @DeleteMapping("/{candidateId}/skills/{skillId}")
+    @ResponseStatus(HttpStatus.OK)
+    public CandidateResponseDto removeSkill(@PathVariable Long candidateId,
+                                            @PathVariable Long skillId) {
+        return candidateService.removeSkill(candidateId, skillId);
     }
 }
