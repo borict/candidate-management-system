@@ -84,4 +84,20 @@ public class CandidateServiceImpl implements  CandidateService{
         Candidate updatedCandidate = candidateRepository.save(candidate);
         return CandidateMapper.toResponseDto(updatedCandidate);
     }
+
+    @Override
+    public List<CandidateResponseDto> searchCandidatesByFullName(String fullName) {
+        return candidateRepository.findByFullNameContainingIgnoreCase(fullName)
+                .stream()
+                .map(CandidateMapper::toResponseDto)
+                .toList();
+    }
+
+    @Override
+    public List<CandidateResponseDto> searchCandidatesBySkill(String skill) {
+        return candidateRepository.findBySkills_NameIgnoreCase(skill)
+                .stream()
+                .map(CandidateMapper::toResponseDto)
+                .toList();
+    }
 }

@@ -8,6 +8,7 @@ import com.borict.candidatemanagement.services.CandidateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,5 +52,14 @@ public class CandidateController {
     public CandidateResponseDto removeSkill(@PathVariable Long candidateId,
                                             @PathVariable Long skillId) {
         return candidateService.removeSkill(candidateId, skillId);
+    }
+    @GetMapping("/search")
+    public ResponseEntity<List<CandidateResponseDto>> searchCandidatesByFullName(@RequestParam String fullName){
+        return ResponseEntity.ok(candidateService.searchCandidatesByFullName(fullName));
+    }
+
+    @GetMapping("/search/by-skill")
+    public ResponseEntity<List<CandidateResponseDto>> searchCandidatesBySkill(@RequestParam String skill){
+        return ResponseEntity.ok(candidateService.searchCandidatesBySkill(skill));
     }
 }
