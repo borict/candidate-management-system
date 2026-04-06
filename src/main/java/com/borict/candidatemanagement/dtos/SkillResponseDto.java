@@ -8,6 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SkillResponseDto {
+
     private Long id;
     private String name;
+
 }

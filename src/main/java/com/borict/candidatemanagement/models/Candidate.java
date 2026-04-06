@@ -15,6 +15,7 @@ import java.util.HashSet;
 @AllArgsConstructor
 @Builder
 public class Candidate {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

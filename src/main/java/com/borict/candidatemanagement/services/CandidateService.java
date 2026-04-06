@@ -8,6 +8,7 @@ import com.borict.candidatemanagement.dtos.SkillRequestDto;
 import java.util.List;
 
 public interface CandidateService {
+
     CandidateResponseDto create(CandidateRequestDto dto);
     List<CandidateResponseDto> findAll();
     CandidateResponseDto findById(Long id);
@@ -17,4 +18,5 @@ public interface CandidateService {
     CandidateResponseDto removeSkill(Long candidateId, Long skillId);
     List<CandidateResponseDto> searchCandidatesByFullName(String fullName);
     List<CandidateResponseDto> searchCandidatesBySkill(String skill);
+
 }

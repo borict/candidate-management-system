@@ -6,11 +6,11 @@ import com.borict.candidatemanagement.dtos.CandidateUpdateDto;
 import com.borict.candidatemanagement.dtos.SkillResponseDto;
 import com.borict.candidatemanagement.models.Candidate;
 import com.borict.candidatemanagement.models.Skill;
-
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CandidateMapper {
+
     public static Candidate toEntity(CandidateRequestDto dto){
         return Candidate.builder()
                 .fullName(dto.getFullName())

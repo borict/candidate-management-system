@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CandidateRequestDto {
+
     @NotBlank(message = "Full name is required")
     private String fullName;
 
@@ -25,4 +26,5 @@ public class CandidateRequestDto {
     @NotBlank(message = "Email is required")
     @Email(message = "Email must be valid")
     private String email;
+
 }

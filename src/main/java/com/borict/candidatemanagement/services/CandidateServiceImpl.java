@@ -17,8 +17,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CandidateServiceImpl implements  CandidateService{
+
     private final CandidateRepository candidateRepository;
     private final SkillRepository skillRepository;
+
     @Override
     public CandidateResponseDto create(CandidateRequestDto dto) {
         Candidate candidate = CandidateMapper.toEntity(dto);
@@ -26,6 +28,7 @@ public class CandidateServiceImpl implements  CandidateService{
                 candidateRepository.save(candidate)
         );
     }
+
     @Override
     public List<CandidateResponseDto> findAll() {
         return candidateRepository.findAll()
@@ -33,12 +36,14 @@ public class CandidateServiceImpl implements  CandidateService{
                 .map(CandidateMapper::toResponseDto)
                 .toList();
     }
+
     @Override
     public CandidateResponseDto findById(Long id) {
         Candidate candidate = candidateRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Candidate not found with id: " + id));
         return CandidateMapper.toResponseDto(candidate);
     }
+
     @Override
     public CandidateResponseDto update(Long id, CandidateUpdateDto dto) {
         Candidate candidate = candidateRepository.findById(id)
@@ -48,6 +53,7 @@ public class CandidateServiceImpl implements  CandidateService{
                 candidateRepository.save(candidate)
         );
     }
+
     @Override
     public void delete(Long id) {
         Candidate candidate = candidateRepository.findById(id)

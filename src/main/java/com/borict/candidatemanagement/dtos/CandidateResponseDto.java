@@ -11,10 +11,12 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CandidateResponseDto {
+
     private Long id;
     private String fullName;
     private LocalDate dateOfBirth;
     private String contactNumber;
     private String email;
     private Set<SkillResponseDto> skills;
+
 }

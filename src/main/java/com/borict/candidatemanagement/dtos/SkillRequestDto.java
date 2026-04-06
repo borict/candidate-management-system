@@ -9,6 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SkillRequestDto {
+
     @NotBlank(message = "Skill name is required")
     private String name;
+
 }
